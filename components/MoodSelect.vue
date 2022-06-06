@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div>
-                <button type="submit" class="
+                <button @click="combOne" type="submit" class="
                 my-1
                 px-6
                 py-2.5
@@ -41,7 +41,7 @@
                 duration-150
                 ease-in-out">1 2 3</button>
 
-                <button type="submit" class="
+                <button @click="combTwo" type="submit" class="
                 my-1
                 px-6
                 py-2.5
@@ -61,7 +61,7 @@
                 ease-in-out">1 3 2</button>
 
                 
-                <button type="submit" class="
+                <button @click="combThree" type="submit" class="
                 my-1
                 px-6
                 py-2.5
@@ -80,7 +80,7 @@
                 duration-150
                 ease-in-out">3 1 2</button>
 
-                <button type="submit" class="
+                <button @click="combFour" type="submit" class="
                 my-1
                 px-6
                 py-2.5
@@ -99,7 +99,7 @@
                 duration-150
                 ease-in-out">3 2 1</button>
 
-                <button type="submit" class="
+                <button @click="combFive" type="submit" class="
                 my-1
                 px-6
                 py-2.5
@@ -118,7 +118,7 @@
                 duration-150
                 ease-in-out">2 3 1</button>
                 
-                <button type="submit" class="
+                <button @click="combSix" type="submit" class="
                 my-1
                 px-6
                 py-2.5
@@ -145,6 +145,26 @@
 
 <script>
 export default {
-    props: ['user', 'login'],
+    methods: {
+        combOne () {
+            this.$emit('setMoodNumber', 123)
+        },
+        combTwo () {
+            this.$emit('setMoodNumber', 132)
+        },
+        combThree () {
+            this.$emit('setMoodNumber', 312)
+        },
+        combFour () {
+            this.$emit('setMoodNumber', 321)
+        },
+        combFive () {
+            this.$emit('setMoodNumber', 231)
+        },
+        combSix() {
+            console.log('combSix');
+            this.$emit('setMoodNumber', 213)
+        },
+    }
 }
 </script>

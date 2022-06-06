@@ -4,7 +4,8 @@
     <MoodSelect v-if="applicationIntro.moodSelector && step==2" :user="user" :login="login"/> -->
     <div v-if="appIntro.display">
       <UserDetails v-if="appIntro.step == 1" :login="IntroStepInc"/>
-      <MoodSelect v-if="appIntro.step == 2" />
+      <MoodSelect v-if="appIntro.step == 2" v-on:setMoodNumber="setMoodNum" />
+      {{appIntro.moodNumber}} {{fromChild}}
     </div>
   </div>
 </template>
@@ -24,11 +25,21 @@ export default {
       appIntro : {
         display: true,
         step: 1,
+        moodNumber: 0,
       },
+      fromChild: '',
     };
   },
   methods: {
     IntroStepInc() {
+      this.appIntro.step++;
+    },
+    MoodNumber(){
+      console.log('testing')
+    },
+    setMoodNum(value){
+      console.log('inside parent')
+      this.appIntro.moodNumber = value
       this.appIntro.step++;
     }
   },
