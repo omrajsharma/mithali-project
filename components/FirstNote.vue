@@ -8,7 +8,7 @@
                 <p align="center" class="my-4 leading-tight">
                     After every article you need to give answer related to the article to go on next artice. <br> So read carefully!
                 </p>
-                <button  type="submit" class="
+                <button @click="startArticle" type="submit" class="
                 w-full
                 px-6
                 py-2.5
@@ -30,3 +30,13 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    methods: {
+        startArticle() {
+            this.$emit('startArticles')
+        }
+    }
+}
+</script>

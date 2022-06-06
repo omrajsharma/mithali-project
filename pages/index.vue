@@ -4,8 +4,12 @@
       <UserDetails v-if="appIntro.step == 1" :login="IntroStepInc"/>
       <MoodSelect v-if="appIntro.step == 2" v-on:setMoodNumber="setMoodNum" />
       <CurrentMood v-if="appIntro.step == 3" v-on:setMoodList="setMoodList"  />
-      <FirstNote v-if="appIntro.step == 4" v-on:startArticles="appIntro.step++" />
+      <FirstNote v-if="appIntro.step == 4" v-on:startArticles="introFinish" />
       <!-- {{currentMoodList}} -->
+      <div>
+        <span>AppIntro</span>
+        {{appIntro}}
+      </div>
       <div>
         <span>Mood List : </span>
         {{currentMoodList}}
@@ -61,7 +65,10 @@ export default {
       this.currentMoodList.push(value)
       this.appIntro.step++;
     },
-
+    introFinish(){
+      this.appIntro.display = false;
+      this.appIntro.step++;
+    },
   },
 
   // LIFE CYCLE
