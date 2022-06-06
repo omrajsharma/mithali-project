@@ -1,8 +1,6 @@
 <template>
 <div class="w-screen h-screen flex items-center justify-center">
     <div class="m-4">
-        
-                {{store}}
         <div class="block p-6 rounded-lg shadow-lg bg-white max-w-md w-full">
             <div class="mb-4">
                 <span class="text-lg">
