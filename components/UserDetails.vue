@@ -87,8 +87,7 @@
                         <option value="others">Others</option>
                     </select>
                 </div>
-                <NuxtLink to="/main">
-                <button type="submit" class="
+                <button @click="login" type="submit" class="
                 w-full
                 px-6
                 py-2.5
@@ -106,10 +105,15 @@
                 transition
                 duration-150
                 ease-in-out">Next</button>
-                </NuxtLink>
             </form>
         </div>
     </div>
 </div>
 </template>
 
+
+<script>
+export default {
+    props: ['user', 'login'],
+}
+</script>

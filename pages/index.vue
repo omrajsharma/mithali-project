@@ -1,6 +1,6 @@
 <template>
   <div class="w-screen h-screen bg-cyan-500">
-    <UserDetails :user="user"/>
+    <UserDetails v-if="!loginStatus" :user="user" :login="login"/>
   </div>
 </template>
 
@@ -12,11 +12,17 @@ export default {
   data() {
     return {
       user: {
-        name: '',
-        age: '',
-        email: ''
-      }
+        name: 'Omraj Sharma',
+        age: '21',
+        email: 'omraj7413@gmail.com'
+      },
+      loginStatus: false
     };
-  }
+  },
+  methods: {
+    login() {
+      this.loginStatus = true;
+    }
+  },
 }
 </script>
