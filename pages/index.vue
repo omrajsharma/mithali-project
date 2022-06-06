@@ -3,6 +3,12 @@
     <div v-if="appIntro.display">
       <UserDetails v-if="appIntro.step == 1" :login="IntroStepInc"/>
       <MoodSelect v-if="appIntro.step == 2" v-on:setMoodNumber="setMoodNum" />
+      <CurrentMood v-if="appIntro.step == 3" v-on:setMoodList="setMoodList"  />
+      <!-- {{currentMoodList}} -->
+      <div>
+        <span>Mood List : </span>
+        {{currentMoodList}}
+      </div>
     </div>
   </div>
 </template>
@@ -10,13 +16,16 @@
 <script>
 import UserDetails from '../components/UserDetails.vue';
 import MoodSelector from '../components/MoodSelect.vue';
+import CurrentMood from '../components/CurrentMood.vue';
 
 export default {
   name: 'IndexPage',
   // COMPONENTS
   components: {
     UserDetails,
-    MoodSelector
+    MoodSelector,
+    CurrentMood,
+
   },
 
   // DATA
@@ -27,6 +36,7 @@ export default {
         step: 1,
         moodNumber: 0,
       },
+      currentMoodList: [],
 
     };
   },
@@ -43,7 +53,12 @@ export default {
       console.log('inside parent')
       this.appIntro.moodNumber = value
       this.appIntro.step++;
-    }
+    },
+    setMoodList(value){
+      console.log('inside parent', value)
+      this.currentMoodList.push(value)
+    },
+
   },
 
   // LIFE CYCLE

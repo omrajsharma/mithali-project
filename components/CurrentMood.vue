@@ -1,101 +1,89 @@
 <template>
-<div class="w-screen h-screen flex items-center justify-center">
-
-    <div class="m-4">
-        <div class="block p-6 rounded-lg shadow-lg bg-white max-w-md">
-            <div class="mb-4">
-                <span class="text-lg">
-                    Registration
-                </span>
-                <hr>
+    <div class="w-screen h-screen flex items-center justify-center">
+        <div class="m-4">
+            <div class="block p-6 rounded-lg shadow-lg bg-white max-w-md w-full">
+                <div align="center" class="mb-6 text-2xl">
+                Feeling?
+                </div>
+                <div class="mb-6 flex justify-center gap-2 place-content-evenly">
+                    <div class="text-xl">
+                        😔
+                    </div>
+                    <div class="flex">
+                        <!-- <span class="font-medium">
+                            SAD
+                        </span> -->
+                        <div class="mr-2 ml-2 flex gap-4">
+                            <div class="flex flex-col">
+                                <label for="one">1</label>
+                                <input value="1" id="one" v-model="mood" type="radio">
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="two">2</label>
+                                <input value="2" id="two" v-model="mood" type="radio">
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="three">3</label>
+                                <input value="3" id="three" v-model="mood" type="radio">
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="four">4</label>
+                                <input value="4" id="four" v-model="mood" type="radio">
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="five">5</label>
+                                <input value="5" id="five" v-model="mood" type="radio">
+                            </div>
+                        </div>
+                        <!-- <span class="font-medium">
+                            Happy
+                        </span> -->
+                    </div>
+                    <div class="text-xl">
+                        😊
+                    </div>
+                </div>
+                <div>
+                    <button @click="setMood" type="submit" class="
+                        w-full
+                        my-1
+                        px-6
+                        py-2.5
+                        bg-cyan-600
+                        text-white
+                        font-medium
+                        text-xs
+                        leading-tight
+                        uppercase
+                        rounded
+                        shadow-md
+                        hover:bg-cyan-700 hover:shadow-lg
+                        focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0
+                        active:bg-cyan-800 active:shadow-lg
+                        transition
+                        duration-150
+                        ease-in-out">Submit</button>
+                </div>
             </div>
-            <form>
-                <div class="form-group mb-6">
-                    <input type="text" class="form-control
-                    block
-                    w-full
-                    px-3
-                    py-1.5
-                    text-base
-                    font-normal
-                    text-gray-700
-                    bg-white bg-clip-padding
-                    border border-solid border-gray-300
-                    rounded
-                    transition
-                    ease-in-out
-                    m-0
-                    focus:text-gray-700 focus:bg-white focus:border-cyan-600 focus:outline-none" id="exampleInput123"
-                    aria-describedby="emailHelp123" placeholder="Full name" required>
-                </div>
-                <!-- age input -->
-                <div class="form-group mb-6">
-                    <input type="number" class="form-control
-                    block
-                    w-full
-                    px-3
-                    py-1.5
-                    text-base
-                    font-normal
-                    text-gray-700
-                    bg-white bg-clip-padding
-                    border border-solid border-gray-300
-                    rounded
-                    transition
-                    ease-in-out
-                    m-0
-                    focus:text-gray-700 focus:bg-white focus:border-cyan-600 focus:outline-none" id="exampleInput123"
-                    aria-describedby="emailHelp123" placeholder="Age" required>
-                </div>
-                <div class="form-group mb-6">
-                    <select class="form-select appearance-none
-                    block
-                    w-full
-                    px-3
-                    py-1.5
-                    text-base
-                    font-normal
-                    text-gray-700
-                    bg-white bg-clip-padding bg-no-repeat
-                    border border-solid border-gray-300
-                    rounded
-                    transition
-                    ease-in-out
-                    m-0
-                    focus:text-gray-700 focus:bg-white focus:border-cyan-600 focus:outline-none" aria-label="Gender" required>
-                        <option selected disabled>Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="others">Others</option>
-                    </select>
-                </div>
-                <button @click="login" type="submit" class="
-                w-full
-                px-6
-                py-2.5
-                bg-cyan-600
-                text-white
-                font-medium
-                text-xs
-                leading-tight
-                uppercase
-                rounded
-                shadow-md
-                hover:bg-cyan-700 hover:shadow-lg
-                focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0
-                active:bg-cyan-800 active:shadow-lg
-                transition
-                duration-150
-                ease-in-out">Next</button>
-            </form>
         </div>
     </div>
-</div>
 </template>
-
 
 <script>
 export default {
-    props: ['user', 'login'],
+    data() {
+        return {
+            mood: 'maast',
+        }
+    },
+    methods: {
+        handleMoodChange(mood) {
+            this.mood = mood;
+        },
+        setMood(mood) {
+            console.log(mood)
+            this.$emit('setMoodList', this.mood);
+        },
+    },
 }
 </script>
