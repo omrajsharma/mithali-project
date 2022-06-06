@@ -73,13 +73,10 @@
 export default {
     data() {
         return {
-            mood: 'maast',
+            mood: '',
         }
     },
     methods: {
-        handleMoodChange(mood) {
-            this.mood = mood;
-        },
         setMood(mood) {
             console.log(mood)
             this.$emit('setMoodList', this.mood);
