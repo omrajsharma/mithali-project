@@ -96,6 +96,6 @@
 
 <script>
 export default {
-    props: ['login'],
+    props: ['user', 'login'],
 }
 </script>
