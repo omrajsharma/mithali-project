@@ -1,11 +1,8 @@
 <template>
   <div class="w-screen h-screen bg-cyan-500">
-    <!-- <UserDetails v-if="!applicationIntro.loginStatus && step==1" :user="user" :login="login"/>
-    <MoodSelect v-if="applicationIntro.moodSelector && step==2" :user="user" :login="login"/> -->
     <div v-if="appIntro.display">
       <UserDetails v-if="appIntro.step == 1" :login="IntroStepInc"/>
       <MoodSelect v-if="appIntro.step == 2" v-on:setMoodNumber="setMoodNum" />
-      {{appIntro.moodNumber}} {{fromChild}}
     </div>
   </div>
 </template>
@@ -16,10 +13,13 @@ import MoodSelector from '../components/MoodSelect.vue';
 
 export default {
   name: 'IndexPage',
+  // COMPONENTS
   components: {
     UserDetails,
     MoodSelector
   },
+
+  // DATA
   data() {
     return {
       appIntro : {
@@ -27,9 +27,11 @@ export default {
         step: 1,
         moodNumber: 0,
       },
-      fromChild: '',
+
     };
   },
+
+  // METHODS
   methods: {
     IntroStepInc() {
       this.appIntro.step++;
@@ -43,6 +45,8 @@ export default {
       this.appIntro.step++;
     }
   },
+
+  // LIFE CYCLE
   computed: {
     moodSelector() {
       return this.step == 2;
