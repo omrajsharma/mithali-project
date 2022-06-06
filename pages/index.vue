@@ -4,6 +4,7 @@
       <UserDetails v-if="appIntro.step == 1" :login="IntroStepInc"/>
       <MoodSelect v-if="appIntro.step == 2" v-on:setMoodNumber="setMoodNum" />
       <CurrentMood v-if="appIntro.step == 3" v-on:setMoodList="setMoodList"  />
+      <FirstNote v-if="appIntro.step == 4" v-on:startArticles="appIntro.step++" />
       <!-- {{currentMoodList}} -->
       <div>
         <span>Mood List : </span>
@@ -17,6 +18,7 @@
 import UserDetails from '../components/UserDetails.vue';
 import MoodSelector from '../components/MoodSelect.vue';
 import CurrentMood from '../components/CurrentMood.vue';
+import FirstNote from '../components/FirstNote.vue';
 
 export default {
   name: 'IndexPage',
@@ -25,6 +27,7 @@ export default {
     UserDetails,
     MoodSelector,
     CurrentMood,
+    FirstNote,
 
   },
 
@@ -55,8 +58,8 @@ export default {
       this.appIntro.step++;
     },
     setMoodList(value){
-      console.log('inside parent', value)
       this.currentMoodList.push(value)
+      this.appIntro.step++;
     },
 
   },
