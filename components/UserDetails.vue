@@ -10,7 +10,6 @@
                 <hr>
             </div>
             <form>
-                <div class="grid grid-cols-2 gap-4">
                 <div class="form-group mb-6">
                     <input type="text" class="form-control
                     block
@@ -29,6 +28,7 @@
                     focus:text-gray-700 focus:bg-white focus:border-cyan-600 focus:outline-none" id="exampleInput123"
                     aria-describedby="emailHelp123" placeholder="Full name" required>
                 </div>
+                <!-- age input -->
                 <div class="form-group mb-6">
                     <input type="number" class="form-control
                     block
@@ -44,26 +44,8 @@
                     transition
                     ease-in-out
                     m-0
-                    focus:text-gray-700 focus:bg-white focus:border-cyan-600 focus:outline-none" id="exampleInput124"
-                    aria-describedby="emailHelp124" placeholder="Mobile Number" required>
-                </div>
-                </div>
-                <div class="form-group mb-6">
-                <input type="email" class="form-control block
-                    w-full
-                    px-3
-                    py-1.5
-                    text-base
-                    font-normal
-                    text-gray-700
-                    bg-white bg-clip-padding
-                    border border-solid border-gray-300
-                    rounded
-                    transition
-                    ease-in-out
-                    m-0
-                    focus:text-gray-700 focus:bg-white focus:border-cyan-600 focus:outline-none" id="exampleInput125"
-                    placeholder="Email" required>
+                    focus:text-gray-700 focus:bg-white focus:border-cyan-600 focus:outline-none" id="exampleInput123"
+                    aria-describedby="emailHelp123" placeholder="Age" required>
                 </div>
                 <div class="form-group mb-6">
                     <select class="form-select appearance-none
