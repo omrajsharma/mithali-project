@@ -145,23 +145,23 @@
 export default {
     methods: {
         combOne () {
-            this.$emit('setMoodNumber', 123)
+            this.$emit('setMoodNumber', "123")
         },
         combTwo () {
-            this.$emit('setMoodNumber', 132)
+            this.$emit('setMoodNumber', "132")
         },
         combThree () {
-            this.$emit('setMoodNumber', 312)
+            this.$emit('setMoodNumber', "312")
         },
         combFour () {
-            this.$emit('setMoodNumber', 321)
+            this.$emit('setMoodNumber', "321")
         },
         combFive () {
-            this.$emit('setMoodNumber', 231)
+            this.$emit('setMoodNumber', "231")
         },
         combSix() {
             console.log('combSix');
-            this.$emit('setMoodNumber', 213)
+            this.$emit('setMoodNumber', "213")
         },
     }
 }
