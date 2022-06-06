@@ -6,18 +6,23 @@
       <MoodSelect v-if="appIntro.step == 2" v-on:setMoodNumber="setMoodNum" />
       <CurrentMood v-if="appIntro.step == 3" v-on:setMoodList="setMoodList"  />
       <FirstNote v-if="appIntro.step == 4" v-on:startArticles="introFinish" />
-      <!-- {{currentMoodList}} -->
       <div>
-        <span>AppIntro</span>
-        {{appIntro}}
-      </div>
-      <div>
-        <span>Mood List : </span>
-        {{currentMoodList}}
-      </div>
-      <div>
-        <span>Mood sequence : </span>
-        {{moodSequence}}
+        <div>
+          <span>AppIntro</span>
+          {{appIntro}}
+        </div>
+        <div>
+          <span>Mood List : </span>
+          {{currentMoodList}}
+        </div>
+        <div>
+          <span>Mood sequence : </span>
+          {{moodSequence}}
+        </div>
+        <div>
+          <span>score : </span>
+          {{score}}
+        </div>
       </div>
     </div>
     <!-- END INTRODUCTION -->
@@ -25,9 +30,13 @@
 
     <!-- ARTICLES -->
     <div v-if="articles.displayArticle">
-      articles
+      <Article 
+      :article="articles.happy[0]" 
+      :articleNumber="articles.articleNumber" 
+      v-on:incrementScore="incrementScore"
+      v-on:nextArticle="nextArticle"
+      />
     </div>
-    hey
   </div>
 </template>
 
@@ -36,6 +45,7 @@ import UserDetails from '../components/UserDetails.vue';
 import MoodSelector from '../components/MoodSelect.vue';
 import CurrentMood from '../components/CurrentMood.vue';
 import FirstNote from '../components/FirstNote.vue';
+import Article from '../components/articles/articles.vue';
 
 export default {
   name: 'IndexPage',
@@ -45,20 +55,32 @@ export default {
     MoodSelector,
     CurrentMood,
     FirstNote,
+    Article
   },
 
   // DATA
   data() {
     return {
+      score: 0,
       appIntro : {
         display: true,
         step: 1,
       },
-      moodSequence : null,
+      moodSequence : {
+        value: "",
+        current: 0,
+      },
+
       currentMoodList: [],
       articles: {
+        articleNumber: 1,
         displayArticle: false,
-        // currentMood: this.moodSequence,
+        happyCount: 0,
+        sadCount: 0,
+        neutral: 0,
+        happyLength: 0,
+        sadLength: 0,
+        neutralLength: 0,
         happy: [
           {
             content: [
@@ -69,7 +91,7 @@ export default {
               "WHO said this week that for the first time the COVAX program will distribute doses only to countries with the lowest vaccination rates. The vaccine sharing program since January has allocated most of the vaccine doses to more than 140 recipient countries in proportion to the population. assistant Director-General of WHO, in a recording of last week's conference presentation uploaded to the WHO's official website."
             ],
             quiz: {
-              question: '',
+              question: 'According to the article, Russia recorded how many cases?',
               option: [
                 {
                   text: '789',
@@ -88,6 +110,7 @@ export default {
                   correct: true,
                 },
               ],
+              answer: '887',
             }
           }
         ],
@@ -111,8 +134,7 @@ export default {
     },
     setMoodNum(value){
       console.log('inside parent')
-      // this.appIntro.moodNumber = value
-      this.moodSequence = value;
+      this.moodSequence.value = value;
       this.appIntro.step++;
     },
     setMoodList(value){
@@ -124,6 +146,14 @@ export default {
       this.appIntro.step++;
       this.articles.displayArticle = true;
     },
+    incrementScore(){
+      console.log('score incremented')
+      this.score++;
+    },
+    nextArticle(){
+      console.log('next article')
+      this.articles.articleNumber++;
+    },
   },
 
   // LIFE CYCLE
@@ -133,7 +163,8 @@ export default {
     },
     loginStatus() {
       return this.step == 3;
-    }
+    },
+
   },
 
   // WATCH
@@ -147,6 +178,10 @@ export default {
   mounted() {
     console.log(this.articles);
     console.log(this.appIntro);
+    console.log(this.moodSequence);
+    this.articles.happyLength = this.articles.happy.length;
+    this.articles.sadLength = this.articles.sad.length;
+    this.articles.neutralLength = this.articles.neutral.length;
   },
 
 }
