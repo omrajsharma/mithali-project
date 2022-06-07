@@ -7,7 +7,8 @@
                 </div>
                 <div class="mb-6 flex justify-center gap-2 place-content-evenly">
                     <div class="text-xl">
-                        😔
+                        <!-- 😊 -->
+                        Happy
                     </div>
                     <div class="flex">
                         <!-- <span class="font-medium">
@@ -34,13 +35,23 @@
                                 <label for="five">5</label>
                                 <input value="5" id="five" v-model="mood" type="radio">
                             </div>
+                            <div class="flex flex-col">
+                                <label for="six">6</label>
+                                <input value="6" id="six" v-model="mood" type="radio">
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="seven">7</label>
+                                <input value="7" id="seven" v-model="mood" type="radio">
+                            </div>
+                            
                         </div>
                         <!-- <span class="font-medium">
                             Happy
                         </span> -->
                     </div>
                     <div class="text-xl">
-                        😊
+                        <!-- 😔 -->
+                        Sad
                     </div>
                 </div>
                 <div>
