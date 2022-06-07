@@ -6,7 +6,7 @@
       <MoodSelect v-if="appIntro.step == 2" v-on:setMoodNumber="setMoodNum" />
       <CurrentMood v-if="appIntro.step == 3" v-on:setMoodList="setMoodList"  />
       <FirstNote v-if="appIntro.step == 4" v-on:startArticles="introFinish" />
-      <div>
+      <!-- <div>
         <div>
           <span>AppIntro</span>
           {{appIntro}}
@@ -23,7 +23,7 @@
           <span>score : </span>
           {{score}}
         </div>
-      </div>
+      </div> -->
     </div>
     <!-- END INTRODUCTION -->
 
