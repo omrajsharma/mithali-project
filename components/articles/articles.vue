@@ -124,7 +124,7 @@ export default {
         submitQuiz() {
             if (this.quizSelect == this.article.quiz.answer) {
                 // console.log('correct');
-                this.$emit('incrementScore')
+                this.$emit('incrementScore');
             } else {
                 // alert('Incorrect');
                 // console.log('incorrect');
