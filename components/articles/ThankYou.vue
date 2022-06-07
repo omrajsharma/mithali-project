@@ -3,7 +3,7 @@
         <div class="m-4">
             <div class="block p-6 rounded-lg shadow-lg bg-white max-w-md w-full">
                 <div class="text-2xl font-medium mb-4" align="center">
-                    Thank You 🙏
+                    Thank You!
                 </div>
                 <button @click="goToHome" type="submit" class="
                     w-full
