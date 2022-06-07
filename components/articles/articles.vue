@@ -1,7 +1,7 @@
 <template>
     <div class="w-screen h-screen flex items-center justify-center">
         <div class="m-4">
-            <div class="block p-6 rounded-lg shadow-lg bg-white max-w-md w-full">
+            <div class="block p-6 rounded-lg shadow-lg bg-white max-w-3xl w-full">
                 <div v-if="displayParagraph">
                     <div>
                         <span  class="font-medium text-lg mb-2">
