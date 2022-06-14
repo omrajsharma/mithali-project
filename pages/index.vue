@@ -1,29 +1,12 @@
 <template>
   <div class="w-screen h-screen bg-cyan-500">
+    {{neutralData}}
     <!-- INTRODUCTION -->
     <div v-if="appIntro.display">
       <UserDetails v-if="appIntro.step == 1" :login="IntroStepInc"/>
       <MoodSelect v-if="appIntro.step == 2" v-on:setMoodNumber="setMoodNum" />
       <CurrentMood v-if="appIntro.step == 3" v-on:setMoodList="setMoodList"  />
       <FirstNote v-if="appIntro.step == 4" v-on:startArticles="introFinish" />
-      <!-- <div>
-        <div>
-          <span>AppIntro</span>
-          {{appIntro}}
-        </div>
-        <div>
-          <span>Mood List : </span>
-          {{currentMoodList}}
-        </div>
-        <div>
-          <span>Mood sequence : </span>
-          {{moodSequence}}
-        </div>
-        <div>
-          <span>score : </span>
-          {{score}}
-        </div>
-      </div> -->
     </div>
     <!-- END INTRODUCTION -->
 
@@ -64,6 +47,11 @@ import Article from '../components/articles/articles.vue';
 import WantToContinue from '~/components/articles/WantToContinue.vue';
 import ThankYou from '~/components/articles/ThankYou.vue';
 
+// IMPORT DATA
+import happy from '~/data/happy.json';
+import sad from '~/data/sad.json';
+import neutral from '~/data/neutral.json';
+
 export default {
   name: 'IndexPage',
   // COMPONENTS
@@ -82,6 +70,9 @@ export default {
   // DATA
   data() {
     return {
+      happyData : happy,
+      sadData : sad,
+      neutralData : neutral,
       score: 0,
       appIntro : {
         display: true,
