@@ -91,7 +91,7 @@ export default {
         value: "",
         current: 0,
       },
-
+      stopRead : 0,
       currentMoodList: [],
       articles: {
         displayThankYou: false,
@@ -546,10 +546,14 @@ export default {
     },
     stopPara() {
       console.log('inside stop para')
-      this.articles.displayArticle = false;
+      this.stopRead++;
+      // this.articles.displayArticle = false;
+      // this.articles.displayCurrentMood = false;
+      // this.articles.WantToContinue = false;
+      // this.articles.displayThankYou = true;
+      this.articles.displayArticle = true;
       this.articles.displayCurrentMood = false;
       this.articles.WantToContinue = false;
-      this.articles.displayThankYou = true;
     }
   },
 
