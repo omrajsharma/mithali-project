@@ -89,7 +89,6 @@ export default {
     },
     methods: {
         setMood(mood) {
-            console.log(mood)
             this.$emit('setMoodList', this.mood);
         },
     },
