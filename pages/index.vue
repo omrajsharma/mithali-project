@@ -499,7 +499,6 @@ export default {
       for(let i=0; i<3; i++){
         if(value[i] == 1){
           for(let a of this.happyData){
-            console.log(a)
             this.articles.allArticles.push(a);
           }
         } else if( value[i] == 2){
