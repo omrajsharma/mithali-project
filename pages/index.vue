@@ -1,6 +1,5 @@
 <template>
   <div class="w-screen h-screen bg-cyan-500">
-    {{neutralData}}
     <!-- INTRODUCTION -->
     <div v-if="appIntro.display">
       <UserDetails v-if="appIntro.step == 1" :login="IntroStepInc"/>
@@ -70,19 +69,24 @@ export default {
   // DATA
   data() {
     return {
+      // article data
       happyData : happy,
       sadData : sad,
       neutralData : neutral,
+      // score
       score: 0,
+      // intro
       appIntro : {
         display: true,
         step: 1,
       },
+      // mood sequence
       moodSequence : {
         value: "",
         current: 0,
       },
       stopRead : 0,
+      // mood list
       currentMoodList: [],
       articles: {
         displayThankYou: false,
@@ -102,6 +106,7 @@ export default {
         happyDisplay: false,
         sadDisplay: false,
         neutralDisplay: false,
+        allArticles: [],
         happy: [
           // SAD
           {
@@ -489,8 +494,25 @@ export default {
       console.log('testing')
     },
     setMoodNum(value){
-      console.log('inside parent')
+      console.log('Mood Sequence Selected: ' + value);
       this.moodSequence.value = value;
+      for(let i=0; i<3; i++){
+        if(value[i] == 1){
+          for(let a of this.happyData){
+            console.log(a)
+            this.articles.allArticles.push(a);
+          }
+        } else if( value[i] == 2){
+          for(let a of this.neutralData){
+            this.articles.allArticles.push(a);
+          }
+        } else if( value[i] == 3){
+          for(let a of this.sadData){
+            this.articles.allArticles.push(a);
+          }
+        }
+      }
+      // console.log(this.articles.allArticles);   
       this.appIntro.step++;
     },
     setMoodList(value){
@@ -507,8 +529,8 @@ export default {
       this.articles.displayArticle = true;
     },
     incrementScore(){
-      console.log('score incremented')
       this.score++;
+      console.log('Correct Answer - score incremented. Current Score: ', this.score);
     },
     nextArticle(){
       this.articles.articleNumber++;
@@ -564,9 +586,7 @@ export default {
 
   // MOUNTED
   mounted() {
-    console.log(this.articles);
-    console.log(this.appIntro);
-    console.log(this.moodSequence);
+    console.log("Finally mounted!!");
     this.articles.happyLength = this.articles.happy.length;
     this.articles.sadLength = this.articles.sad.length;
     this.articles.neutralLength = this.articles.neutral.length;
