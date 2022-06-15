@@ -11,12 +11,20 @@
 
     <!-- ARTICLES -->
     <div v-if="articles.displayArticle">
-      <Article
+      <!-- <Article
       :key="articles.articleNumber"
       :article="articles.happy[articles.articleNumber-1]" 
       :articleNumber="articles.articleNumber" 
       v-on:incrementScore="incrementScore"
       v-on:nextArticle="nextArticle"
+      /> -->
+
+      <Article
+        :key="articles.articleNumber"
+        :article="articles.allArticles[articles.articleNumber-1]" 
+        :articleNumber="articles.articleNumber" 
+        v-on:incrementScore="incrementScore"
+        v-on:nextArticle="nextArticle"
       />
     </div>
 
@@ -511,7 +519,7 @@ export default {
           }
         }
       }
-      // console.log(this.articles.allArticles);   
+      // console.log(this.articles.allArticles.length);   
       this.appIntro.step++;
     },
     setMoodList(value){
@@ -543,7 +551,7 @@ export default {
         this.articles.displayCurrentMood = false;
         this.articles.WantToContinue = true;
       }
-      if(this.articles.articleNumber > this.articles.happy.length){
+      if(this.articles.articleNumber > this.articles.allArticles.length){
         this.articles.displayArticle = false;
         this.articles.displayCurrentMood = false;
         this.articles.displayThankYou = true;
