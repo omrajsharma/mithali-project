@@ -565,15 +565,9 @@ export default {
       this.articles.WantToContinue = false;
     },
     stopPara() {
-      console.log('inside stop para')
       this.stopRead++;
-      // this.articles.displayArticle = false;
-      // this.articles.displayCurrentMood = false;
-      // this.articles.WantToContinue = false;
-      // this.articles.displayThankYou = true;
-      this.articles.displayArticle = true;
-      this.articles.displayCurrentMood = false;
-      this.articles.WantToContinue = false;
+      console.log('inside stop para, stopRead:' , this.stopRead);
+      this.continuePara();
     }
   },
 
