@@ -1,14 +1,14 @@
 <template>
 <div class="w-screen h-screen flex items-center justify-center">
     <div class="m-4">
-        <div class="block p-6 rounded-lg shadow-lg bg-white max-w-md w-full">
+        <div class="block p-6 rounded-lg shadow-lg bg-white w-full">
             <div class="mb-4">
                 <span class="text-lg">
                     Select Number Sequence
                 </span>
                 <hr>
             </div>
-            <div class="flex gap-8 place-content-around mb-4 ">
+            <!-- <div class="flex gap-8 place-content-around mb-4 ">
                 <div class="p-2 bg-fuchsia-300 rounded">
                     1. Happy
                 </div>
@@ -18,7 +18,7 @@
                 <div class="p-2 bg-orange-300 rounded">
                     3. Sad
                 </div>
-            </div>
+            </div> -->
             <div>
                 <button @click="combOne" type="submit" class="
                 my-1
