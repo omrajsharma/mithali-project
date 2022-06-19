@@ -541,11 +541,21 @@ export default {
     },
     nextArticle(){
       this.articles.articleNumber++;
-      if((this.articles.articleNumber-1)%3 == 0){
+      // if((this.articles.articleNumber-1)%3 == 0){
+      //   this.articles.displayArticle = false;
+      //   this.articles.displayCurrentMood = true;
+      // }
+      if((this.articles.articleNumber-1)%4 == 3){
         this.articles.displayArticle = false;
         this.articles.displayCurrentMood = true;
       }
-      if((this.articles.articleNumber-1)%5 == 0){
+      // if((this.articles.articleNumber-1)%5 == 0){
+      //   console.log('inside setting want to contrinue')
+      //   this.articles.displayArticle = false;
+      //   this.articles.displayCurrentMood = false;
+      //   this.articles.WantToContinue = true;
+      // }
+      if((this.articles.articleNumber-1)%4 == 0 && this.articles.articleNumber > 0){
         console.log('inside setting want to contrinue')
         this.articles.displayArticle = false;
         this.articles.displayCurrentMood = false;
