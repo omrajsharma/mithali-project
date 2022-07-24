@@ -122,6 +122,7 @@ export default {
             }
         },
         submitQuiz() {
+
             if (this.quizSelect == this.article.quiz.answer) {
                 // console.log('correct');
                 this.$emit('incrementScore');
@@ -129,7 +130,7 @@ export default {
                 // alert('Incorrect');
                 // console.log('incorrect');
             }
-            this.$emit('nextArticle')
+            this.$emit('nextArticle', this.article.quiz.answer, this.quizSelect, );
         }
     },
 }   
