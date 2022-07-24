@@ -3,7 +3,7 @@
     <!-- {{ counterMinutes}} : {{ counterSeconds}} -->
     <!-- INTRODUCTION -->
     <div v-if="appIntro.display">
-      <UserDetails v-if="appIntro.step == 1" :login="IntroStepInc"/>
+      <UserDetails v-if="appIntro.step == 1" v-on:login="IntroStepInc"/>
       <MoodSelect v-if="appIntro.step == 2" v-on:setMoodNumber="setMoodNum" />
       <CurrentMood v-if="appIntro.step == 3" v-on:setMoodList="setMoodList"  />
       <FirstNote v-if="appIntro.step == 4" v-on:startArticles="introFinish" />
@@ -82,9 +82,9 @@ export default {
       counterMinutes: 0,
       counterSeconds: 0,
       // User Details
-      name: 'omraj sharma',
-      age: '10',
-      gender: 'male',
+      name: '',
+      age: '',
+      gender: 'Male',
       // article data
       happyData : happy,
       sadData : sad,
@@ -505,17 +505,30 @@ export default {
   // METHODS
   methods: {
     // Intro form
-    IntroStepInc() {
-      fetch(`https://mitali-sharma-default-rtdb.europe-west1.firebasedatabase.app/omraj.json`,
+    IntroStepInc(name, age, gender) {
+      let tempName = "";
+      for(let i of name){
+        if(i != ' '){
+          tempName += i;
+        } else {
+          tempName += '-';
+        }
+      }
+      this.name = tempName;
+      this.age = age;
+      this.gender = gender;
+      console.log(tempName);
+
+      fetch(`https://mitali-sharma-default-rtdb.europe-west1.firebasedatabase.app/${this.name}.json`,
               {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                  name: this.name,
-                  age: this.name,
-                  gender: this.gender,
+                  userName: name,
+                  userAge: age,
+                  userGender: gender,
                   time: `${this.counterMinutes}:${this.counterSeconds}`
                 })
               }
@@ -567,7 +580,7 @@ export default {
       // const time = date.toLocaleDateString();
       // console.log(time)
       fetch(
-                  "https://mitali-sharma-default-rtdb.europe-west1.firebasedatabase.app/omraj.json",
+                  `https://mitali-sharma-default-rtdb.europe-west1.firebasedatabase.app/${this.name}.json`,
                   {
                     method: "POST",
                     headers: {
@@ -613,7 +626,7 @@ export default {
     // Set Mood Sequence
     setMoodList(value){
       fetch(
-                  "https://mitali-sharma-default-rtdb.europe-west1.firebasedatabase.app/omraj.json/",
+                  `https://mitali-sharma-default-rtdb.europe-west1.firebasedatabase.app/${this.name}.json/`,
                   {
                     method: "POST",
                     headers: {
@@ -655,7 +668,7 @@ export default {
     // Next Article
     nextArticle(answer, select){
       fetch(
-                  "https://mitali-sharma-default-rtdb.europe-west1.firebasedatabase.app/omraj.json/",
+                  `https://mitali-sharma-default-rtdb.europe-west1.firebasedatabase.app/${this.name}.json/`,
                   {
                     method: "POST",
                     headers: {
@@ -709,6 +722,29 @@ export default {
       console.log('next article');
     },
     continuePara() {
+      fetch(
+                  `https://mitali-sharma-default-rtdb.europe-west1.firebasedatabase.app/${this.name}.json/`,
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                      for: 'continue paragraph',
+                      stopCount: this.stopRead,
+                    })
+                  }
+                )
+                  .then((response) => {
+                    if (response.ok) {
+                      console.log("Data Saved Successfully!");
+                    } else {
+                      throw new Error("Unable to save data!!!");
+                    }
+                  })
+                  .catch((error) => {
+                    this.error = error.message;
+                  });
       console.log('inside continue para')
       this.articles.displayArticle = true;
       this.articles.displayCurrentMood = false;
