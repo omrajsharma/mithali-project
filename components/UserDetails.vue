@@ -1,7 +1,7 @@
 <template>
 <div class="w-screen h-screen flex items-center justify-center">
 
-    <div class="flex items-center">
+    <div class="m-4">
         <div class="block p-6 rounded-lg shadow-lg bg-white max-w-md">
             <div class="mb-4">
                 <span class="text-lg">
@@ -10,7 +10,6 @@
                 <hr>
             </div>
             <form>
-                <div class="grid grid-cols-2 gap-4">
                 <div class="form-group mb-6">
                     <input type="text" class="form-control
                     block
@@ -29,6 +28,7 @@
                     focus:text-gray-700 focus:bg-white focus:border-cyan-600 focus:outline-none" id="exampleInput123"
                     aria-describedby="emailHelp123" placeholder="Full name" required>
                 </div>
+                <!-- age input -->
                 <div class="form-group mb-6">
                     <input type="number" class="form-control
                     block
@@ -44,26 +44,8 @@
                     transition
                     ease-in-out
                     m-0
-                    focus:text-gray-700 focus:bg-white focus:border-cyan-600 focus:outline-none" id="exampleInput124"
-                    aria-describedby="emailHelp124" placeholder="Mobile Number" required>
-                </div>
-                </div>
-                <div class="form-group mb-6">
-                <input type="email" class="form-control block
-                    w-full
-                    px-3
-                    py-1.5
-                    text-base
-                    font-normal
-                    text-gray-700
-                    bg-white bg-clip-padding
-                    border border-solid border-gray-300
-                    rounded
-                    transition
-                    ease-in-out
-                    m-0
-                    focus:text-gray-700 focus:bg-white focus:border-cyan-600 focus:outline-none" id="exampleInput125"
-                    placeholder="Email" required>
+                    focus:text-gray-700 focus:bg-white focus:border-cyan-600 focus:outline-none" id="exampleInput123"
+                    aria-describedby="emailHelp123" placeholder="Age" required>
                 </div>
                 <div class="form-group mb-6">
                     <select class="form-select appearance-none
@@ -87,8 +69,7 @@
                         <option value="others">Others</option>
                     </select>
                 </div>
-                <NuxtLink to="/main">
-                <button type="submit" class="
+                <button @click="login" type="submit" class="
                 w-full
                 px-6
                 py-2.5
@@ -106,10 +87,15 @@
                 transition
                 duration-150
                 ease-in-out">Next</button>
-                </NuxtLink>
             </form>
         </div>
     </div>
 </div>
 </template>
 
+
+<script>
+export default {
+    props: ['login'],
+}
+</script>

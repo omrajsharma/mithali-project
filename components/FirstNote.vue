@@ -1,16 +1,14 @@
 <template>
-    <div class="w-screen h-screen flex items-center justify-center bg-cyan-500">
-        <div class="block p-6 rounded-lg shadow-lg bg-white w-screen max-w-md">
-            <div class="text-2xl font-medium mb-4" align="center">
-                NOTE
-            </div>
-            <div class="mb-4">
-                <p align="center">
+    <div class="w-screen h-screen flex items-center justify-center">
+        <div class="m-4">
+            <div class="block p-6 rounded-lg shadow-lg bg-white max-w-md w-full">
+                <div class="font-medium text-xl" align="center">
+                    NOTE!
+                </div>
+                <p align="center" class="my-4 leading-tight">
                     After every article you need to give answer related to the article to go on next artice. <br> So read carefully!
                 </p>
-            </div>
-            <NuxtLink to="/article-1/1">
-                <button type="submit" class="
+                <button @click="startArticle" type="submit" class="
                 w-full
                 px-6
                 py-2.5
@@ -28,7 +26,17 @@
                 transition
                 duration-150
                 ease-in-out">Next</button>
-            </NuxtLink>
+            </div>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    methods: {
+        startArticle() {
+            this.$emit('startArticles')
+        }
+    }
+}
+</script>
