@@ -1,8 +1,9 @@
 <template>
   <div class="w-screen h-screen bg-cyan-500">
+    <!-- {{ counterMinutes}} : {{ counterSeconds}} -->
     <!-- INTRODUCTION -->
     <div v-if="appIntro.display">
-      <UserDetails v-if="appIntro.step == 1" :login="IntroStepInc"/>
+      <UserDetails v-if="appIntro.step == 1" v-on:login="IntroStepInc"/>
       <MoodSelect v-if="appIntro.step == 2" v-on:setMoodNumber="setMoodNum" />
       <CurrentMood v-if="appIntro.step == 3" v-on:setMoodList="setMoodList"  />
       <FirstNote v-if="appIntro.step == 4" v-on:startArticles="introFinish" />
@@ -77,6 +78,13 @@ export default {
   // DATA
   data() {
     return {
+      // couter for application
+      counterMinutes: 0,
+      counterSeconds: 0,
+      // User Details
+      name: '',
+      age: '',
+      gender: 'Male',
       // article data
       happyData : happy,
       sadData : sad,
@@ -490,18 +498,110 @@ export default {
 
         ],
       },
+
     };
   },
 
   // METHODS
   methods: {
-    IntroStepInc() {
+    // Intro form
+    IntroStepInc(name, age, gender) {
+      let tempName = "";
+      for(let i of name){
+        if(i != ' '){
+          tempName += i;
+        } else {
+          tempName += '-';
+        }
+      }
+      this.name = tempName;
+      this.age = age;
+      this.gender = gender;
+      console.log(tempName);
+
+      fetch(`https://mitali-sharma-default-rtdb.europe-west1.firebasedatabase.app/${this.name}.json`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                  userName: name,
+                  userAge: age,
+                  userGender: gender,
+                  time: `${this.counterMinutes}:${this.counterSeconds}`
+                })
+              }
+            )
+              .then((response) => {
+                if (response.ok) {
+                  console.log("Data Saved Successfully!");
+                } else {
+                  throw new Error("Unable to save data!!!");
+                }
+              })
+              .catch((error) => {
+                this.error = error.message;
+              });
       this.appIntro.step++;
     },
-    MoodNumber(){
-      console.log('testing')
-    },
+    // MoodNumber(){
+    //   fetch(
+    //             "https://mitali-sharma-default-rtdb.europe-west1.firebasedatabase.app/omraj.json",
+    //             {
+    //               method: "POST",
+    //               headers: {
+    //                 "Content-Type": "application/json"
+    //               },
+    //               body: JSON.stringify({
+    //                 testing: 'mood number'
+    //               })
+    //             }
+    //           )
+    //             .then((response) => {
+    //               if (response.ok) {
+    //                 console.log("Data Saved Successfully!");
+    //               } else {
+    //                 throw new Error("Unable to save data!!!");
+    //               }
+    //             })
+    //             .catch((error) => {
+    //               this.error = error.message;
+    //             });
+    //   console.log('testing')
+    // },
+
+    // Set Mood Number
     setMoodNum(value){
+      // const date = new Date();
+      // console.log(date)
+      // const n = date.toDateString();
+      // console.log(n)
+      // const time = date.toLocaleDateString();
+      // console.log(time)
+      fetch(
+                  `https://mitali-sharma-default-rtdb.europe-west1.firebasedatabase.app/${this.name}.json`,
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                      setMoodNumber: value,
+                      time: `${this.counterMinutes}:${this.counterSeconds}`
+                    })
+                  }
+                )
+                  .then((response) => {
+                    if (response.ok) {
+                      console.log("Data Saved Successfully!");
+                    } else {
+                      throw new Error("Unable to save data!!!");
+                    }
+                  })
+                  .catch((error) => {
+                    this.error = error.message;
+                  });
       console.log('Mood Sequence Selected: ' + value);
       this.moodSequence.value = value;
       for(let i=0; i<3; i++){
@@ -522,7 +622,32 @@ export default {
       // console.log(this.articles.allArticles.length);   
       this.appIntro.step++;
     },
+
+    // Set Mood Sequence
     setMoodList(value){
+      fetch(
+                  `https://mitali-sharma-default-rtdb.europe-west1.firebasedatabase.app/${this.name}.json/`,
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                      CurrentMood: value,
+                      time: `${this.counterMinutes}:${this.counterSeconds}`
+                    })
+                  }
+                )
+                  .then((response) => {
+                    if (response.ok) {
+                      console.log("Data Saved Successfully!");
+                    } else {
+                      throw new Error("Unable to save data!!!");
+                    }
+                  })
+                  .catch((error) => {
+                    this.error = error.message;
+                  });
       this.currentMoodList.push(value)
       if(this.articles.articleNumber > 1){
         this.displayCurrentMood = false;
@@ -535,11 +660,39 @@ export default {
       this.appIntro.step++;
       this.articles.displayArticle = true;
     },
+    // Increment Scope
     incrementScore(){
       this.score++;
       console.log('Correct Answer - score incremented. Current Score: ', this.score);
     },
-    nextArticle(){
+    // Next Article
+    nextArticle(answer, select){
+      fetch(
+                  `https://mitali-sharma-default-rtdb.europe-west1.firebasedatabase.app/${this.name}.json/`,
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                      answer: answer,
+                      select: select,
+                      correct: answer == select,
+                      time: `${this.counterMinutes}:${this.counterSeconds}`
+                    })
+                  }
+                )
+                  .then((response) => {
+                    if (response.ok) {
+                      console.log("Data Saved Successfully!");
+                    } else {
+                      throw new Error("Unable to save data!!!");
+                    }
+                  })
+                  .catch((error) => {
+                    this.error = error.message;
+                  });
+      
       this.articles.articleNumber++;
       // if((this.articles.articleNumber-1)%3 == 0){
       //   this.articles.displayArticle = false;
@@ -569,6 +722,29 @@ export default {
       console.log('next article');
     },
     continuePara() {
+      fetch(
+                  `https://mitali-sharma-default-rtdb.europe-west1.firebasedatabase.app/${this.name}.json/`,
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                      for: 'continue paragraph',
+                      stopCount: this.stopRead,
+                    })
+                  }
+                )
+                  .then((response) => {
+                    if (response.ok) {
+                      console.log("Data Saved Successfully!");
+                    } else {
+                      throw new Error("Unable to save data!!!");
+                    }
+                  })
+                  .catch((error) => {
+                    this.error = error.message;
+                  });
       console.log('inside continue para')
       this.articles.displayArticle = true;
       this.articles.displayCurrentMood = false;
@@ -578,7 +754,7 @@ export default {
       this.stopRead++;
       console.log('inside stop para, stopRead:' , this.stopRead);
       this.continuePara();
-    }
+    },
   },
 
   // LIFE CYCLE
@@ -601,6 +777,14 @@ export default {
     this.articles.happyLength = this.articles.happy.length;
     this.articles.sadLength = this.articles.sad.length;
     this.articles.neutralLength = this.articles.neutral.length;
+    // counter feature
+    setInterval(() => {
+      this.counterSeconds++;
+      if(this.counterSeconds == 60){
+        this.counterMinutes++;
+        this.counterSeconds = 0;
+      }
+    }, 1000);
   },
 
 }

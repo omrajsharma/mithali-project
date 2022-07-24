@@ -9,9 +9,9 @@
                 </span>
                 <hr>
             </div>
-            <form>
+            <div>
                 <div class="form-group mb-6">
-                    <input type="text" class="form-control
+                    <input v-model="name" type="text" class="form-control
                     block
                     w-full
                     px-3
@@ -30,7 +30,7 @@
                 </div>
                 <!-- age input -->
                 <div class="form-group mb-6">
-                    <input type="number" class="form-control
+                    <input v-model="age" type="number" class="form-control
                     block
                     w-full
                     px-3
@@ -48,7 +48,7 @@
                     aria-describedby="emailHelp123" placeholder="Age" required>
                 </div>
                 <div class="form-group mb-6">
-                    <select class="form-select appearance-none
+                    <select v-model="gender" class="form-select appearance-none
                     block
                     w-full
                     px-3
@@ -69,7 +69,7 @@
                         <option value="others">Others</option>
                     </select>
                 </div>
-                <button @click="login" type="submit" class="
+                <button @click="submitUserDetails" type="submit" class="
                 w-full
                 px-6
                 py-2.5
@@ -87,7 +87,7 @@
                 transition
                 duration-150
                 ease-in-out">Next</button>
-            </form>
+            </div>
         </div>
     </div>
 </div>
@@ -96,6 +96,17 @@
 
 <script>
 export default {
-    props: ['login'],
+    data() {
+        return {
+            name: '',
+            age: '',
+            gender: 'Male'
+        }
+    },
+    methods: {
+        submitUserDetails(){
+            this.$emit('login', this.name, this.age, this.gender);
+        }
+    }
 }
 </script>
